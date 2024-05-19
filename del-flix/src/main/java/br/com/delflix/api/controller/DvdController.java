@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.delflix.application.useCase.dvdUseCase.delete.fisical.IDeleteDvdUseCase;
 import br.com.delflix.application.useCase.dvdUseCase.delete.logical.ILogicalDeleteUseCase;
 import br.com.delflix.application.useCase.dvdUseCase.get.GetDvdsCatalog.IGetDvdsCatalogUseCase;
+import br.com.delflix.application.useCase.dvdUseCase.get.getDvd.IGetDvdUseCase;
 import br.com.delflix.application.useCase.dvdUseCase.register.IRegisterDvdUseCase;
 import br.com.delflix.application.useCase.dvdUseCase.update.IUpdateDvdUseCase;
 import br.com.delflix.shared.request.DvdRequest.RequestDvdJson;
 import br.com.delflix.shared.response.dvdResponse.ResponseDvdJson;
 import br.com.delflix.shared.response.dvdResponse.ResponseDvdsCatalogJson;
+
 
 
 @RestController
@@ -40,16 +42,22 @@ public class DvdController
     @Autowired
     private final IGetDvdsCatalogUseCase _dvdsCatalogUseCase;
 
+    @Autowired
+    private final IGetDvdUseCase _getDvdUseCase;
+
     public DvdController(IRegisterDvdUseCase registerDvdUseCase, 
     IUpdateDvdUseCase updateDvdUseCase, 
     ILogicalDeleteUseCase logicalDeleteUseCase,
     IDeleteDvdUseCase deleteUseCase,
-    IGetDvdsCatalogUseCase dvdsCatalogUseCase) {
+    IGetDvdsCatalogUseCase dvdsCatalogUseCase,
+    IGetDvdUseCase getDvdUseCase) 
+    {
         _registerDvdUseCase = registerDvdUseCase;
         _updateDvdUseCase = updateDvdUseCase;
         _logicalDeleteUseCase = logicalDeleteUseCase;
         _deleteUseCase = deleteUseCase;
         _dvdsCatalogUseCase = dvdsCatalogUseCase;
+        _getDvdUseCase = getDvdUseCase;
     }
 
     @PostMapping("/register")
@@ -66,25 +74,32 @@ public class DvdController
         var response = _dvdsCatalogUseCase.Execute();
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/dvd/{identifier}")
+    public ResponseEntity<ResponseDvdJson> getMethodName(@PathVariable String identifier) 
+    {
+        var response = _getDvdUseCase.Execute(identifier);
+        return ResponseEntity.ok(response);
+    }
     
-    @PutMapping("/update/{id}")
-    public ResponseEntity<ResponseDvdJson> UpdateDvd(@PathVariable String id, @RequestBody RequestDvdJson request) 
+    @PutMapping("/update/{identifier}")
+    public ResponseEntity<ResponseDvdJson> UpdateDvd(@PathVariable String identifier, @RequestBody RequestDvdJson request) 
     {   
-        var response = _updateDvdUseCase.Execute(request, id);
+        var response = _updateDvdUseCase.Execute(request, identifier);
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("delete/{id}")
-    public ResponseEntity PutMethodName(@PathVariable String id) 
+    @PutMapping("delete/{identifier}")
+    public ResponseEntity PutMethodName(@PathVariable String identifier) 
     {    
-        _logicalDeleteUseCase.Execute(id);
+        _logicalDeleteUseCase.Execute(identifier);
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("delete/{id}")
-    public ResponseEntity DeleteMethodName(@PathVariable String id) 
+    @DeleteMapping("delete/{identifier}")
+    public ResponseEntity DeleteMethodName(@PathVariable String identifier) 
     {    
-        _deleteUseCase.Execute(id);
+        _deleteUseCase.Execute(identifier);
         return ResponseEntity.noContent().build();
     }
 }

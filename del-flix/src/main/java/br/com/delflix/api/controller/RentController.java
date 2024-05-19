@@ -7,4 +7,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/rent/v1")
 public class RentController 
 {
+    
 }
