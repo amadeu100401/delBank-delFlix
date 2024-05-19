@@ -1,4 +1,4 @@
-package br.com.delflix.application.validator;
+package br.com.delflix.application.validator.dvdValidation;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import br.com.delflix.shared.request.AuthorRequest.RequestAuthorRegisterJson;
-import br.com.delflix.shared.request.DvdRequest.RequestDvdJson;
+import br.com.delflix.shared.request.DdvdRequest.RequestDvdJson;
 import br.com.fluentvalidator.Validator;
 import br.com.fluentvalidator.context.ValidationResult;
 

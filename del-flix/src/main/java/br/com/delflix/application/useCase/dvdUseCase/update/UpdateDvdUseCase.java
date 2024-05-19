@@ -9,13 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import static br.com.delflix.application.utils.GenderUtils.GetGender;
-import br.com.delflix.application.validator.IValidateDvdRequest;
+import br.com.delflix.application.validator.dvdValidation.IValidateDvdRequest;
 import br.com.delflix.domain.entity.Dvd;
 import br.com.delflix.domain.repository.dvdRepository.IReadOnlyDvdRepository;
 import br.com.delflix.domain.repository.dvdRepository.IUpdateOnlyDvdRepository;
 import br.com.delflix.shared.exception.ErrorOnValidationException;
 import br.com.delflix.shared.request.AuthorRequest.RequestAuthorRegisterJson;
-import br.com.delflix.shared.request.DvdRequest.RequestDvdJson;
+import br.com.delflix.shared.request.DdvdRequest.RequestDvdJson;
 import br.com.delflix.shared.response.dvdResponse.ResponseDvdJson;
 
 @Service

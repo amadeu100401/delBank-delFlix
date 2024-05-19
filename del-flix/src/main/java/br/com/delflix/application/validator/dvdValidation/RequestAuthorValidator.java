@@ -1,4 +1,4 @@
-package br.com.delflix.application.validator;
+package br.com.delflix.application.validator.dvdValidation;
 
 import static java.util.function.Predicate.not;
 

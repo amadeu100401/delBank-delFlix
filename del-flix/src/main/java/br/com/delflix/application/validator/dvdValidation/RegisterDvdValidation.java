@@ -1,8 +1,8 @@
-package br.com.delflix.application.validator;
+package br.com.delflix.application.validator.dvdValidation;
 
 import static java.util.function.Predicate.not;
 
-import br.com.delflix.shared.request.DvdRequest.RequestDvdJson;
+import br.com.delflix.shared.request.DdvdRequest.RequestDvdJson;
 import br.com.fluentvalidator.AbstractValidator;
 import static br.com.fluentvalidator.predicate.ComparablePredicate.greaterThanOrEqual;
 import static br.com.fluentvalidator.predicate.ObjectPredicate.nullValue;

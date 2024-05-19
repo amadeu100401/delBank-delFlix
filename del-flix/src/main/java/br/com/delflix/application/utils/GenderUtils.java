@@ -1,7 +1,7 @@
 package br.com.delflix.application.utils;
 
 import br.com.delflix.shared.Enum.GenderEnum;
-import br.com.delflix.shared.request.DvdRequest.RequestDvdJson;
+import br.com.delflix.shared.request.DdvdRequest.RequestDvdJson;
 
 public class GenderUtils {
     public static String GetGender(RequestDvdJson request)

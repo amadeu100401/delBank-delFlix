@@ -17,7 +17,7 @@ import br.com.delflix.application.useCase.dvdUseCase.get.GetDvdsCatalog.IGetDvds
 import br.com.delflix.application.useCase.dvdUseCase.get.getDvd.IGetDvdUseCase;
 import br.com.delflix.application.useCase.dvdUseCase.register.IRegisterDvdUseCase;
 import br.com.delflix.application.useCase.dvdUseCase.update.IUpdateDvdUseCase;
-import br.com.delflix.shared.request.DvdRequest.RequestDvdJson;
+import br.com.delflix.shared.request.DdvdRequest.RequestDvdJson;
 import br.com.delflix.shared.response.dvdResponse.ResponseDvdJson;
 import br.com.delflix.shared.response.dvdResponse.ResponseDvdsCatalogJson;
 

@@ -1,9 +1,9 @@
-package br.com.delflix.application.validator;
+package br.com.delflix.application.validator.dvdValidation;
 
 import java.util.List;
 
 import br.com.delflix.shared.request.AuthorRequest.RequestAuthorRegisterJson;
-import br.com.delflix.shared.request.DvdRequest.RequestDvdJson;
+import br.com.delflix.shared.request.DdvdRequest.RequestDvdJson;
 import br.com.fluentvalidator.context.ValidationResult;
 
 public interface IValidateDvdRequest 
