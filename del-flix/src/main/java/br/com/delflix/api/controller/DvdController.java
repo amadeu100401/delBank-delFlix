@@ -1,6 +1,7 @@
 package br.com.delflix.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,16 +18,20 @@ import br.com.delflix.application.useCase.dvdUseCase.get.GetDvdsCatalog.IGetDvds
 import br.com.delflix.application.useCase.dvdUseCase.get.getDvd.IGetDvdUseCase;
 import br.com.delflix.application.useCase.dvdUseCase.register.IRegisterDvdUseCase;
 import br.com.delflix.application.useCase.dvdUseCase.update.IUpdateDvdUseCase;
-import br.com.delflix.shared.request.DdvdRequest.RequestDvdJson;
+import br.com.delflix.shared.request.DvdRequest.RequestDvdJson;
 import br.com.delflix.shared.response.dvdResponse.ResponseDvdJson;
 import br.com.delflix.shared.response.dvdResponse.ResponseDvdsCatalogJson;
-
-
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/api/dvd/v1")
-public class DvdController 
-{
+@Tag(name = "Dvds", description = "Dvds API")
+public class DvdController {
+
     @Autowired
     private final IRegisterDvdUseCase _registerDvdUseCase;
 
@@ -45,13 +50,12 @@ public class DvdController
     @Autowired
     private final IGetDvdUseCase _getDvdUseCase;
 
-    public DvdController(IRegisterDvdUseCase registerDvdUseCase, 
-    IUpdateDvdUseCase updateDvdUseCase, 
-    ILogicalDeleteUseCase logicalDeleteUseCase,
-    IDeleteDvdUseCase deleteUseCase,
-    IGetDvdsCatalogUseCase dvdsCatalogUseCase,
-    IGetDvdUseCase getDvdUseCase) 
-    {
+    public DvdController(IRegisterDvdUseCase registerDvdUseCase,
+            IUpdateDvdUseCase updateDvdUseCase,
+            ILogicalDeleteUseCase logicalDeleteUseCase,
+            IDeleteDvdUseCase deleteUseCase,
+            IGetDvdsCatalogUseCase dvdsCatalogUseCase,
+            IGetDvdUseCase getDvdUseCase) {
         _registerDvdUseCase = registerDvdUseCase;
         _updateDvdUseCase = updateDvdUseCase;
         _logicalDeleteUseCase = logicalDeleteUseCase;
@@ -61,44 +65,84 @@ public class DvdController
     }
 
     @PostMapping("/register")
-    public ResponseEntity<ResponseDvdJson> Register(@RequestBody RequestDvdJson request) 
-    {
+    @Operation(summary = "Register dvd", description = "Register dvd", tags = {"Dvds"}, responses = {
+        @ApiResponse(responseCode = "201", description = "Successful operation", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = ResponseDvdJson.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+        @ApiResponse(responseCode = "404", description = "Not found", content = @Content),
+        @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+    })
+    public ResponseEntity<ResponseDvdJson> Register(@RequestBody RequestDvdJson request) {
         var response = _registerDvdUseCase.Execute(request);
 
         return ResponseEntity.created(null).body(response);
     }
 
+    @Cacheable("dvds")
     @GetMapping("/dvd")
-    public ResponseEntity<ResponseDvdsCatalogJson> GetDvdsCatalog() 
-    {
+    @Operation(summary = "Get dvds", description = "Get dvds", tags = {"Dvds"}, responses = {
+        @ApiResponse(responseCode = "200", description = "Successful operation", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = ResponseDvdsCatalogJson.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+        @ApiResponse(responseCode = "404", description = "Not found", content = @Content),
+        @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+    })
+    public ResponseEntity<ResponseDvdsCatalogJson> GetDvdsCatalog() {
         var response = _dvdsCatalogUseCase.Execute();
         return ResponseEntity.ok(response);
     }
 
+    @Cacheable("dvdInfo")
     @GetMapping("/dvd/{identifier}")
-    public ResponseEntity<ResponseDvdJson> getMethodName(@PathVariable String identifier) 
-    {
+    @Operation(summary = "Get dvds by identifier", description = "Get dvds by identifier", tags = {"Dvds"}, responses = {
+        @ApiResponse(responseCode = "200", description = "Successful operation", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = ResponseDvdJson.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+        @ApiResponse(responseCode = "404", description = "Not found", content = @Content),
+        @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+    })
+    public ResponseEntity<ResponseDvdJson> getMethodName(@PathVariable String identifier) {
         var response = _getDvdUseCase.Execute(identifier);
         return ResponseEntity.ok(response);
     }
-    
+
     @PutMapping("/update/{identifier}")
-    public ResponseEntity<ResponseDvdJson> UpdateDvd(@PathVariable String identifier, @RequestBody RequestDvdJson request) 
-    {   
+    @Operation(summary = "Update dvd's info", description = "Update dvd's info", tags = {"Dvds"}, responses = {
+        @ApiResponse(responseCode = "200", description = "Successful operation", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = ResponseDvdJson.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+        @ApiResponse(responseCode = "404", description = "Not found", content = @Content),
+        @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+    })
+    public ResponseEntity<ResponseDvdJson> UpdateDvd(@PathVariable String identifier, @RequestBody RequestDvdJson request) {
         var response = _updateDvdUseCase.Execute(request, identifier);
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("delete/{identifier}")
-    public ResponseEntity PutMethodName(@PathVariable String identifier) 
-    {    
+    @DeleteMapping("disable-dvd/{identifier}")
+    @Operation(summary = "Desactivate dvd", description = "Desactivate dvd", tags = {"Dvds"}, responses = {
+        @ApiResponse(responseCode = "204", description = "Successful operation", content = @Content),
+        @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+        @ApiResponse(responseCode = "404", description = "Not found", content = @Content),
+        @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+    })
+    public ResponseEntity DisableDvd(@PathVariable String identifier) {
         _logicalDeleteUseCase.Execute(identifier);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("delete/{identifier}")
-    public ResponseEntity DeleteMethodName(@PathVariable String identifier) 
-    {    
+    @Operation(summary = "Delete dvd", description = "Delete dvd", tags = {"Dvds"}, responses = {
+        @ApiResponse(responseCode = "204", description = "Successful operation", content = @Content),
+        @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+        @ApiResponse(responseCode = "404", description = "Not found", content = @Content),
+        @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+    })
+    public ResponseEntity DeleteMethodName(@PathVariable String identifier) {
         _deleteUseCase.Execute(identifier);
         return ResponseEntity.noContent().build();
     }
