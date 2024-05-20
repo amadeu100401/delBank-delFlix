@@ -1,4 +1,4 @@
-package br.com.delflix.application.useCase.rentUseCase.rentDvd;
+package br.com.delflix.application.useCase.rentUseCase.getRent;
 
 import br.com.delflix.shared.request.RentRequest.RequestRentJson;
 import br.com.delflix.shared.response.rentResponse.ResponseRentDvdJson;
