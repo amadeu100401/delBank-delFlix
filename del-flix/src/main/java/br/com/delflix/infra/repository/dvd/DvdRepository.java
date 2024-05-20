@@ -11,71 +11,61 @@ import br.com.delflix.domain.repository.dvdRepository.IUpdateOnlyDvdRepository;
 import br.com.delflix.domain.repository.dvdRepository.IWriteOnlyDvdRepository;
 
 @Service
-public class DvdRepository implements IWriteOnlyDvdRepository, IReadOnlyDvdRepository, IUpdateOnlyDvdRepository
-{
+public class DvdRepository implements IWriteOnlyDvdRepository, IReadOnlyDvdRepository, IUpdateOnlyDvdRepository {
+
     @Autowired
     private final IDvdRepository _dvdRepository;
 
-    public DvdRepository(IDvdRepository dvdRepository) 
-    {
+    public DvdRepository(IDvdRepository dvdRepository) {
         _dvdRepository = dvdRepository;
     }
 
     @Override
-    public void SaveDvd(Dvd dvd) 
-    {
+    public void SaveDvd(Dvd dvd) {
         _dvdRepository.save(dvd);
     }
 
     @Override
-    public boolean DvdAlreadyRegistred(String title) 
-    {
+    public boolean DvdAlreadyRegistred(String title) {
         Dvd result = _dvdRepository.findByTitle(title);
-        
-        return result!= null;
-    }
-
-    @Override
-    public boolean DvdExistsByIdentifier(String identifier) 
-    {
-        Dvd result = _dvdRepository.findByIdentifier(identifier);
 
         return result != null;
     }
 
     @Override
-    public void UpdateDvd(Dvd dvd) 
-    {
+    public boolean DvdExistsByIdentifier(String identifier) {
+        Dvd result = _dvdRepository.findAllByIdentifier(identifier);
+
+        return result != null;
+    }
+
+    @Override
+    public void UpdateDvd(Dvd dvd) {
         _dvdRepository.save(dvd);
     }
 
     @Override
-    public Dvd GetDvdInDb(String identifier)
-    {
-        return _dvdRepository.findByIdentifier(identifier);
+    public Dvd GetDvdInDb(String identifier) {
+        return _dvdRepository.findByIdentifierAndActive(identifier);
     }
 
     @Override
-    public void LogicalDeleteDvd(Dvd dvdEntity) 
-    {
+    public void LogicalDeleteDvd(Dvd dvdEntity) {
         _dvdRepository.save(dvdEntity);
     }
 
     @Override
-    public void FisicalDelete(String identifier) 
-    {
+    public void FisicalDelete(String identifier) {
         _dvdRepository.deleteByIdentifier(identifier);
     }
 
     @Override
-    public List<Dvd> GetDvdsCatalog() 
-    {
+    public List<Dvd> GetDvdsCatalog() {
         return _dvdRepository.findAllAviable();
     }
 
     @Override
-    public Dvd GetDvdByIdentifier(String identifier) 
-    {
-        return _dvdRepository.findByIdentifier(identifier);
+    public Dvd GetDvdByIdentifier(String identifier) {
+        return _dvdRepository.findByIdentifierAndActive(identifier);
     }
 }

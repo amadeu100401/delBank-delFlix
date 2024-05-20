@@ -12,16 +12,19 @@ import br.com.delflix.domain.entity.Dvd;
 import jakarta.transaction.Transactional;
 
 @Repository
-public interface IDvdRepository extends JpaRepository<Dvd, Long>
-{
-    Dvd findByTitle(String title);  
+public interface IDvdRepository extends JpaRepository<Dvd, Long> {
+
+    Dvd findByTitle(String title);
 
     @Query("SELECT d FROM Dvd d WHERE d.Identifier = :identifier AND d.Aviable = true")
-    Dvd findByIdentifier(@Param("identifier") String identifier);
+    Dvd findByIdentifierAndActive(@Param("identifier") String identifier);
+
+    @Query("SELECT d FROM Dvd d WHERE d.Identifier = :identifier")
+    Dvd findAllByIdentifier(@Param("identifier") String identifier);
 
     @Query("SELECT d FROM Dvd d WHERE d.Aviable = true")
     List<Dvd> findAllAviable();
-    
+
     @Modifying
     @Transactional
     @Query("DELETE FROM Dvd d WHERE d.Identifier = :identifier")

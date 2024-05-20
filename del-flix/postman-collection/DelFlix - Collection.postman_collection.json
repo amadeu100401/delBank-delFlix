@@ -1,0 +1,315 @@
+{
+	"info": {
+		"_postman_id": "105bdebd-15f7-4fc5-81ad-07a4f179313b",
+		"name": "DelFlix - Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "19069505"
+	},
+	"item": [
+		{
+			"name": "Dvd",
+			"item": [
+				{
+					"name": "register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Resposta está no formato JSON\", function () {\r",
+									"    pm.response.to.have.jsonBody();\r",
+									"    var jsonResponse = pm.response.json();\r",
+									"\r",
+									"    var identifier = jsonResponse.identifier;\r",
+									"\r",
+									"    pm.collectionVariables.set(\"identifier\", identifier);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"{{$randomFileName}}\",\r\n  \"gender\": \"COMEDY\",\r\n  \"published\": \"1999-03-31T00:00:00Z\",\r\n  \"copiesQuantity\": {{$randomInt}},\r\n  \"aviable\": true,\r\n  \"author\":{\r\n    \"name\": \"{{$randomFirstName}}\",\r\n    \"surname\": \"{{$randomFirstName}}\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{urlBase}}/api/dvd/v1/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Update info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Resposta está no formato JSON\", function () {\r",
+									"    pm.response.to.have.jsonBody();\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"{{$randomFileName}}\",\r\n  \"gender\": \"COMEDY\",\r\n  \"published\": \"1999-03-31T00:00:00Z\",\r\n  \"copiesQuantity\": {{$randomInt}},\r\n  \"aviable\": true,\r\n  \"author\":{\r\n    \"name\": \"{{$randomFirstName}}\",\r\n    \"surname\": \"{{$randomFirstName}}\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{urlBase}}/api/dvd/v1/update/{{identifier}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Logical delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{urlBase}}/api/dvd/v1/disable-dvd/{{identifier}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Fisical delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{urlBase}}/api/dvd/v1/delete/{{identifier}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Dvds catalog",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Resposta está no formato JSON\", function () {\r",
+									"    pm.response.to.have.jsonBody();\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{urlBase}}/api/dvd/v1/dvd"
+					},
+					"response": []
+				},
+				{
+					"name": "Get one DVD",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Resposta está no formato JSON\", function () {\r",
+									"    pm.response.to.have.jsonBody();\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{urlBase}}/api/dvd/v1/dvd/8afc5524-2c7b-4573-ac34-f4e94c2ee110"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rent",
+			"item": [
+				{
+					"name": "rent dvd",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"dvdIdentifier\": \"2b6ea61b-f5b1-4331-a4ea-6c3832348453\",\r\n  \"days\": 5\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{urlBase}}/api/rent/v1/rent-dvd"
+					},
+					"response": []
+				},
+				{
+					"name": "Return DVD",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": "{{urlBase}}/api/rent/v1/return-dvd/2b6ea61b-f5b1-4331-a4ea-6c3832348453"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "urlBase",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"value": ""
+		},
+		{
+			"key": "identifier",
+			"value": ""
+		}
+	]
+}
