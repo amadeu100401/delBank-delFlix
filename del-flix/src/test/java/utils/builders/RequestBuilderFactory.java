@@ -1,6 +1,7 @@
 package utils.builders;
 
 import java.util.Date;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -9,6 +10,7 @@ import com.github.javafaker.Faker;
 import br.com.delflix.shared.Enum.GenderEnum;
 import br.com.delflix.shared.request.AuthorRequest.RequestAuthorRegisterJson;
 import br.com.delflix.shared.request.DvdRequest.RequestDvdJson;
+import br.com.delflix.shared.request.RentRequest.RequestRentJson;
 import utils.tools.UtilsTools;
 
 @Service
@@ -42,6 +44,13 @@ public class RequestBuilderFactory {
         return new RequestAuthorRegisterJson(
                 faker.name().firstName(),
                 faker.name().lastName()
+        );
+    }
+
+    public static RequestRentJson RequestRentBuilder() {
+        return new RequestRentJson(
+                UUID.randomUUID().toString(),
+                faker.random().nextInt(1, 7)
         );
     }
 }

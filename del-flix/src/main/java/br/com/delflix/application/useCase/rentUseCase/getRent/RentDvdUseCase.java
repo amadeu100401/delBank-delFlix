@@ -14,8 +14,8 @@ import br.com.delflix.shared.request.RentRequest.RequestRentJson;
 import br.com.delflix.shared.response.rentResponse.ResponseRentDvdJson;
 
 @Service
-public class RentDvdUseCase implements IRentDvdUseCase
-{
+public class RentDvdUseCase implements IRentDvdUseCase {
+
     @Autowired
     private final IValidateRentRequest _validateRequest;
 
@@ -23,30 +23,26 @@ public class RentDvdUseCase implements IRentDvdUseCase
     private final IGetRentDvdService _getRentDvdService;
 
     public RentDvdUseCase(IValidateRentRequest validateRequest,
-    IReadOnlyDvdRepository readOnlyRespository,
-    IGetRentDvdService getRentDvdService) 
-    {
+            IReadOnlyDvdRepository readOnlyRespository,
+            IGetRentDvdService getRentDvdService) {
         _validateRequest = validateRequest;
         _getRentDvdService = getRentDvdService;
     }
 
     @Override
-    public ResponseRentDvdJson Execute(RequestRentJson request) 
-    {
+    public ResponseRentDvdJson Execute(RequestRentJson request) {
         Validate(request);
         var response = _getRentDvdService.GetRentDvd(request);
         return response;
     }
 
-    private void Validate(RequestRentJson request)
-    {
+    private void Validate(RequestRentJson request) {
         List<String> errorsMessager = new ArrayList<>();
 
         var resultDvdRequest = _validateRequest.ValidateRequest(request);
 
-        if(!_validateRequest.IsValidRequest(resultDvdRequest))
-        {
-            _validateRequest.GetErrorMessage(errorsMessager,resultDvdRequest);
+        if (!_validateRequest.IsValidRequest(resultDvdRequest)) {
+            _validateRequest.GetErrorMessage(errorsMessager, resultDvdRequest);
             throw new ErrorOnValidationException(errorsMessager);
         }
     }
