@@ -77,7 +77,7 @@ src/
 |   |               ├── delflix/
 │   │               ├── domain/
 |   |                   └── entity
-|   |                   └── reposiroty
+|   |                   └── repository
 |   |                   └── service
 │   │               ├── infrastructure/
 |   |                   └── configuration
@@ -95,5 +95,5 @@ O sistema foi desenvolvido utilizando a arquitetura em camadas, separando em 6 c
 - Infra -> Camada para utilização de serviços externos a aplicação. Aqui está toda lógica para conexão com banco de dados e configuração de bibliotecas como o modelMapper e o Swagger
 - Shared -> Essa camada contém classes que são compartilhadas por todas as demais camdas. Ela armazena classes de requests e response para a aapi. Além disso, é nessa camada que foi feita a configuração da exceção personalizada.
 
-Para a validação dos objetos de requests nos métodos POST e PUT foi utlilizado a biblioteca Fluent Validation ([Acesse a documentação](https://mvallim.github.io/java-fluent-validator/))
-Para a mapping entre entidades, foi utilizado a biblioteca modelMapper [Acesse a documentação](https://modelmapper.org/)
+#### Para a validação dos objetos de requests nos métodos POST e PUT foi utlilizado a biblioteca Fluent Validation ([Acesse a documentação](https://mvallim.github.io/java-fluent-validator/))
+#### Para a mapping entre entidades, foi utilizado a biblioteca modelMapper [Acesse a documentação](https://modelmapper.org/)
