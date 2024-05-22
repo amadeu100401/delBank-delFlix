@@ -50,9 +50,13 @@ Para construir e executar a aplicação, utilize os seguintes comandos:
 mvn clean install
 mvn spring-boot:run
 ```
-### PS: Para parar a aplicação use o comando
+### Para parar a aplicação use o comando
 ```sh
 ctrl + C
+```
+### Para executar os testes unitários use o comando
+```sh
+mvn test
 ```
 ## Documentação da API
 A documentação da API está disponível através do SpringDoc OpenAPI. Após iniciar a aplicação, acesse:
@@ -97,3 +101,18 @@ O sistema foi desenvolvido utilizando a arquitetura em camadas, separando em 6 c
 
 #### Para a validação dos objetos de requests nos métodos POST e PUT foi utlilizado a biblioteca Fluent Validation ([Acesse a documentação](https://mvallim.github.io/java-fluent-validator/))
 #### Para a mapping entre entidades, foi utilizado a biblioteca modelMapper [Acesse a documentação](https://modelmapper.org/)
+### Para a geração de dados para a simulação nos testes foi utilizado a biblioteca Faker [Acesse a documentação](https://github.com/DiUS/java-faker)
+
+## Sobre os endpoints 
+![image](https://github.com/amadeu100401/delBank-delFlix/assets/54649985/475070c5-f885-4e59-80c0-1dfe97f428e5)
+
+1. No controller de Dvds temos:
+    - PUT {/update/{identifier}} -> Endpoint para alteração de dados dos dvs já cadastrados na base
+    - POST {/register} -> Endpoint para cadastro de novos dvds
+    - GET {/dvd} -> Endpoint para obter a lista de todos os dvds cadastrados
+    - GET {/dvd/{identifier}} -> Endpoint para recuperar as infomrações de um dvd específico
+    - DELETE {/disable-dvd} -> Endpoint para poder excluir logicamente o dvd
+    - DELETE {/delete{identifier}} -> Endpoint para pode excluir o dvd da base de dados
+2. No controller de Rent temos:
+    - POST {/rent-dvd} -> Endpoint para poder alugar um dvd da base
+    - PUT {/rent-dvd} -> Endpoint para pode devolver o dvd alugado
