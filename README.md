@@ -1,4 +1,4 @@
-# DelFlix API 
+# DelFlix API - Desafio DelBank
 
 ## Descrição
 DelFlix é um projeto de demonstração desenvolvido usando Spring Boot. Esta aplicação gerencia um catálogo de DVDs e utiliza MySQL como banco de dados.
@@ -7,15 +7,15 @@ DelFlix é um projeto de demonstração desenvolvido usando Spring Boot. Esta ap
 - Java 21
 - Spring Boot 3.2.5
 - Maven
-- MySQL
+- MySQL 
 - ModelMapper
 - Mockito
 - SpringDoc OpenAPI
 
 ## Pré-requisitos
-- JDK 21
-- Maven 3.8.1 ou superior
-- MySQL 8.0 ou superior
+- JDK 21 [SITE Oracle](https://www.oracle.com/br/java/technologies/downloads/)
+- Maven 3.8.1 ou superior [Site MAVEN](https://maven.apache.org/download.cgi)
+- MySQL 8.0 ou superior [Site do MySQL](https://www.mysql.com/downloads/)
 
 ## Configuração do Ambiente
 
@@ -99,9 +99,9 @@ O sistema foi desenvolvido utilizando a arquitetura em camadas, separando em 6 c
 - Infra -> Camada para utilização de serviços externos a aplicação. Aqui está toda lógica para conexão com banco de dados e configuração de bibliotecas como o modelMapper e o Swagger
 - Shared -> Essa camada contém classes que são compartilhadas por todas as demais camdas. Ela armazena classes de requests e response para a aapi. Além disso, é nessa camada que foi feita a configuração da exceção personalizada.
 
-#### Para a validação dos objetos de requests nos métodos POST e PUT foi utlilizado a biblioteca Fluent Validation ([Acesse a documentação](https://mvallim.github.io/java-fluent-validator/))
+#### Para a validação dos objetos de requests nos métodos POST e PUT foi utlilizado a biblioteca Fluent Validation [Acesse a documentação](https://mvallim.github.io/java-fluent-validator/))
 #### Para a mapping entre entidades, foi utilizado a biblioteca modelMapper [Acesse a documentação](https://modelmapper.org/)
-### Para a geração de dados para a simulação nos testes foi utilizado a biblioteca Faker [Acesse a documentação](https://github.com/DiUS/java-faker)
+#### Para a geração de dados para a simulação nos testes foi utilizado a biblioteca Faker [Acesse a documentação](https://github.com/DiUS/java-faker)
 
 ## Sobre os endpoints 
 ![image](https://github.com/amadeu100401/delBank-delFlix/assets/54649985/475070c5-f885-4e59-80c0-1dfe97f428e5)
@@ -116,3 +116,30 @@ O sistema foi desenvolvido utilizando a arquitetura em camadas, separando em 6 c
 2. No controller de Rent temos:
     - POST {/rent-dvd} -> Endpoint para poder alugar um dvd da base
     - PUT {/rent-dvd} -> Endpoint para pode devolver o dvd alugado
+      
+## Postman
+Foi disponibilizado junto ao repositório uma collection no postman para testes, caso prefira.
+### Como utilizar
+### Como Importar uma Collection no Postman
+## Passo 1: Abrir o Postman
+Certifique-se de que o Postman está instalado e aberto em seu computador. Se você ainda não tem o Postman, você pode baixá-lo [aqui](https://www.postman.com/downloads/).
+
+## Passo 2: Acessar a Opção de Importação
+
+1. **Clique em "Importar":**
+   - No canto superior esquerdo do Postman, clique no botão "Import".
+
+## Passo 3: Selecionar o Arquivo ou Link
+
+2. **Escolha a Origem:**
+   - Você pode importar uma collection a partir de um arquivo no seu computador ou através de um link. 
+   - Para importar a partir de um arquivo, clique na aba "File" e depois em "Choose Files". Navegue até o local onde o arquivo da collection (.json) está salvo e selecione-o.
+   - Para importar a partir de um link, clique na aba "Link" e insira o URL da collection. 
+
+## Passo 4: Importar a Collection
+
+3. **Importar:**
+   - Depois de selecionar o arquivo ou inserir o link, clique no botão "Import". O Postman irá processar o arquivo ou link e importar a collection para o seu ambiente.
+
+Para utilizar o serviço pelo postman basta subir a aplicação, colocar a url base na variável de ambiente da collection.
+É possível rodar a collection como um todo pois os requests possuem testes de validação
