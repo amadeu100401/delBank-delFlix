@@ -21,7 +21,7 @@ DelFlix é um projeto de demonstração desenvolvido usando Spring Boot. Esta ap
 
 ### 1. Clonar o Repositório
 ```sh
-git clone https://github.com/seu-usuario/delflix.git
+git clone https://github.com/amadeu100401/delBank-delFlix.git
 ```
 
 ### 2. Configurar o Banco de Dados
