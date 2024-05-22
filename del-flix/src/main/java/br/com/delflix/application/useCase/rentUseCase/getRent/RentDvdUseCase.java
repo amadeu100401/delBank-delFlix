@@ -41,7 +41,7 @@ public class RentDvdUseCase implements IRentDvdUseCase {
 
         var resultDvdRequest = _validateRequest.ValidateRequest(request);
 
-        if (!_validateRequest.IsValidRequest(resultDvdRequest)) {
+        if (!resultDvdRequest.isValid()) {
             _validateRequest.GetErrorMessage(errorsMessager, resultDvdRequest);
             throw new ErrorOnValidationException(errorsMessager);
         }
