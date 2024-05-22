@@ -6,6 +6,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -37,6 +38,7 @@ public class RentDvdUseCaseTest {
     }
 
     @Test
+    @DisplayName("Success Get Rent Dvd")
     public void Success_UseCase() {
         var request = RequestBuilderFactory.RequestRentBuilder();
         var expectedResponse = ResponseBuilderFactory.ResponseRentDvdBuilder();
@@ -52,6 +54,7 @@ public class RentDvdUseCaseTest {
     }
 
     @Test
+    @DisplayName("Failed Get Rent Dvd")
     public void Failed_UseCase() {
         var request = RequestBuilderFactory.RequestRentBuilder();
         List<String> errorMessages = new ArrayList<>();

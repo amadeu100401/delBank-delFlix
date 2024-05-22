@@ -5,6 +5,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -40,6 +41,7 @@ public class UpdateDvdServiceTest {
     }
 
     @Test
+    @DisplayName("Success Update Dvd Service")
     public void Success_Service() {
         var request = RequestBuilderFactory.RequestDvdBuilder();
         var identifier = UUID.randomUUID().toString();
@@ -59,12 +61,13 @@ public class UpdateDvdServiceTest {
     }
 
     @Test
+    @DisplayName("Failed Update Dvd Service")
     public void Failed_Service() {
         var request = RequestBuilderFactory.RequestDvdBuilder();
         var identifier = UUID.randomUUID().toString();
 
         when(readOnlyDvdRepository.DvdExistsByIdentifier(identifier)).thenReturn(false);
-        
+
         assertThrows(ErrorOnValidationException.class, () -> {
             updateDvdService.UpdateDvd(request, identifier);
         });

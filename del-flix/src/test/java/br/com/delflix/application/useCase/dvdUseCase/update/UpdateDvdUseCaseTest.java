@@ -5,6 +5,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -35,6 +36,7 @@ public class UpdateDvdUseCaseTest {
     }
 
     @Test
+    @DisplayName("Success Update Dvd")
     public void Success_UseCase() {
         var request = RequestBuilderFactory.RequestDvdBuilder();
         var identifier = UUID.randomUUID().toString();
@@ -53,6 +55,7 @@ public class UpdateDvdUseCaseTest {
     }
 
     @Test
+    @DisplayName("Failed Update Dvd")
     public void Failed_UseCase() {
         var request = RequestBuilderFactory.RequestDvdBuilder();
         var identifier = UUID.randomUUID().toString();

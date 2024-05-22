@@ -5,6 +5,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -28,6 +29,7 @@ public class GetDvdUseCaseTest {
     }
 
     @Test
+    @DisplayName("Success Get One Dvd")
     public void Success_UseCase() {
         var identifierRequest = UUID.randomUUID().toString();
         var expectedResponse = ResponseBuilderFactory.ResponseDvdBuilder();
@@ -40,6 +42,7 @@ public class GetDvdUseCaseTest {
     }
 
     @Test
+    @DisplayName("No Content Get One Dvd")
     public void No_Content_UseCase() {
         var identifierRequest = UUID.randomUUID().toString();
 

@@ -5,6 +5,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -56,6 +57,7 @@ public class DvdControllerTest {
     }
 
     @Test
+    @DisplayName("Successful Dvd Register")
     public void Successful_Dvd_Register() {
         var request = RequestBuilderFactory.RequestDvdBuilder();
         var response = ResponseBuilderFactory.ResponseDvdBuilder();
@@ -70,6 +72,7 @@ public class DvdControllerTest {
     }
 
     @Test
+    @DisplayName("Failed Dvd Register")
     public void Failed_Dvd_Register() {
         var request = RequestBuilderFactory.RequestDvdBuilder();
         doThrow(ErrorOnValidationException.class).when(registerDvdUseCase).Execute(request);
@@ -83,6 +86,7 @@ public class DvdControllerTest {
     }
 
     @Test
+    @DisplayName("Successful Get Dvds Catalog")
     public void Successful_Get_Dvds_Catalog() {
         var response = ResponseBuilderFactory.ResponseDvdsCatalogBuilder();
 
@@ -96,6 +100,7 @@ public class DvdControllerTest {
     }
 
     @Test
+    @DisplayName("Successful Get Dvds Catalog")
     public void Successful_Get_One_Dvd() {
         String identifier = UUID.randomUUID().toString();
         var response = ResponseBuilderFactory.ResponseDvdBuilder();
@@ -110,6 +115,7 @@ public class DvdControllerTest {
     }
 
     @Test
+    @DisplayName("Failed Get One Dvd")
     public void Failed_Get_One_Dvd() {
         String identifier = UUID.randomUUID().toString();
         doThrow(ErrorOnValidationException.class).when(getDvdUseCase).Execute(identifier);
@@ -123,6 +129,7 @@ public class DvdControllerTest {
     }
 
     @Test
+    @DisplayName("Successful Dvd Update")
     public void Successful_Dvd_Update() {
         String identifier = UUID.randomUUID().toString();
         var request = RequestBuilderFactory.RequestDvdBuilder();
@@ -138,6 +145,7 @@ public class DvdControllerTest {
     }
 
     @Test
+    @DisplayName("Failed Dvd Update")
     public void Failed_Dvd_Update() {
         String identifier = UUID.randomUUID().toString();
         var request = RequestBuilderFactory.RequestDvdBuilder();
@@ -153,6 +161,7 @@ public class DvdControllerTest {
     }
 
     @Test
+    @DisplayName("Successful Dvd Disable")
     public void Successful_Disable_Dvd() {
         String identifier = UUID.randomUUID().toString();
 
@@ -163,6 +172,7 @@ public class DvdControllerTest {
     }
 
     @Test
+    @DisplayName("Failed Dvd Disable")
     public void Failed_Disable_Dvd() {
         String identifier = UUID.randomUUID().toString();
         doThrow(ErrorOnValidationException.class).when(logicalDeleteUseCase).Execute(identifier);
@@ -176,6 +186,7 @@ public class DvdControllerTest {
     }
 
     @Test
+    @DisplayName("Successful Delete Dvd")
     public void Successful_Delete_Dvd() {
         String identifier = "someIdentifier";
 
@@ -186,6 +197,7 @@ public class DvdControllerTest {
     }
 
     @Test
+    @DisplayName("Failed Delete Dvd")
     public void Failed_Delete_Dvd() {
         String identifier = UUID.randomUUID().toString();
         doThrow(ErrorOnValidationException.class).when(deleteDvdUseCase).Execute(identifier);

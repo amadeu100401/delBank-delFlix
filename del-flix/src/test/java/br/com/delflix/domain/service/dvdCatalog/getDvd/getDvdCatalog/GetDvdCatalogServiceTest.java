@@ -4,6 +4,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -31,6 +32,7 @@ public class GetDvdCatalogServiceTest {
     }
 
     @Test
+    @DisplayName("Success Get Dvd Catalog Service")
     public void Success_Service() {
         var dvd = EntityBuilderFactory.DvdBuilder();
 
@@ -41,6 +43,7 @@ public class GetDvdCatalogServiceTest {
     }
 
     @Test
+    @DisplayName("No Content Get Dvd Catalog Service")
     public void No_Content_Service() {
         when(readOnlyDvdRepository.GetDvdsCatalog()).thenReturn(List.of());
 

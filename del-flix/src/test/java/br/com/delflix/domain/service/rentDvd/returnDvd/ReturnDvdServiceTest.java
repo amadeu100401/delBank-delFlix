@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -34,6 +35,7 @@ public class ReturnDvdServiceTest {
     }
 
     @Test
+    @DisplayName("Success Return Dvd Service")
     public void Success_Service() {
         var identifier = UUID.randomUUID().toString();
         var dvd = EntityBuilderFactory.DvdBuilder();
@@ -53,6 +55,7 @@ public class ReturnDvdServiceTest {
     }
 
     @Test
+    @DisplayName("Fail Return Dvd Service")
     public void Fail_Service() {
         var identifier = UUID.randomUUID().toString();
 

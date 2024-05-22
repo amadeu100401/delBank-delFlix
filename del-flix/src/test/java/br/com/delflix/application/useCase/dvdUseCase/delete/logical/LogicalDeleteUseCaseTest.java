@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -29,6 +30,7 @@ public class LogicalDeleteUseCaseTest {
     }
 
     @Test
+    @DisplayName("Success Logical Delete Dvd")
     public void Success_UseCase() {
         var identifier = UUID.randomUUID().toString();
 
@@ -38,6 +40,7 @@ public class LogicalDeleteUseCaseTest {
     }
 
     @Test
+    @DisplayName("Failed Logical Delete Dvd")
     public void Failed_UseCase() {
         var identifier = UUID.randomUUID().toString();
 

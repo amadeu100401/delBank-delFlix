@@ -3,6 +3,7 @@ package br.com.delflix.application.useCase.dvdUseCase.register;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -33,6 +34,7 @@ public class RegisterDvdUseCaseTest {
     }
 
     @Test
+    @DisplayName("Success Register Dvd")
     public void Success_UseCase() {
         var request = RequestBuilderFactory.RequestDvdBuilder();
         var expectedResponse = ResponseBuilderFactory.ResponseDvdBuilder();
@@ -49,6 +51,7 @@ public class RegisterDvdUseCaseTest {
     }
 
     @Test
+    @DisplayName("Failed Register Dvd")
     public void Failed_UseCase() {
         var request = RequestBuilderFactory.RequestDvdBuilder();
 

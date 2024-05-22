@@ -3,6 +3,7 @@ package br.com.delflix.domain.service.dvdCatalog.registerDvd;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -38,6 +39,7 @@ public class RegisterDvdServiceTest {
     }
 
     @Test
+    @DisplayName("Success Register Dvd Service")
     public void Success_Service() {
         var request = RequestBuilderFactory.RequestDvdBuilder();
         var dvd = EntityBuilderFactory.DvdBuilder();
@@ -55,6 +57,7 @@ public class RegisterDvdServiceTest {
     }
 
     @Test
+    @DisplayName("Fail Register Dvd Service")
     public void Fail_Service() {
         var request = RequestBuilderFactory.RequestDvdBuilder();
         when(readOnlyDvdRepository.DvdAlreadyRegistred(request.getTitle())).thenReturn(true);

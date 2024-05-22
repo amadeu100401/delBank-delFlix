@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -31,6 +32,7 @@ public class FisicalDeleteDvdServiceTest {
     }
 
     @Test
+    @DisplayName("Failed Fisical delete Service")
     public void Failed_Service() {
         String identifier = UUID.randomUUID().toString();
 
