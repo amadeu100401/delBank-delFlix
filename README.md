@@ -97,8 +97,9 @@ O sistema foi desenvolvido utilizando a arquitetura em camadas, separando em 6 c
 - Application -> Camada intermediária, que contém os useCase, fazendo a ligação da camada API com a DOMAIN. Nela estão algumas validações e a chamada dos services
 - Domain -> Camada principal do sistema: ela contém a lógica de negócio (services - seguindo o conceito de DDD), bem como contém as interfaces de acesso ao banco de dados. Essa camada também contém as entidades que refletem o banco de dados.
 - Infra -> Camada para utilização de serviços externos a aplicação. Aqui está toda lógica para conexão com banco de dados e configuração de bibliotecas como o modelMapper e o Swagger
-- Shared -> Essa camada contém classes que são compartilhadas por todas as demais camdas. Ela armazena classes de requests e response para a aapi. Além disso, é nessa camada que foi feita a configuração da exceção personalizada.
+- Shared -> Essa camada contém classes que são compartilhadas por todas as demais camadas. Ela armazena classes de requests e response para a api. Além disso, é nessa camada que foi feita a configuração da exceção personalizada.
 
+### Explicando bibliotecas utilizadas
 #### Para a validação dos objetos de requests nos métodos POST e PUT foi utlilizado a biblioteca Fluent Validation [Acesse a documentação](https://mvallim.github.io/java-fluent-validator/))
 #### Para a mapping entre entidades, foi utilizado a biblioteca modelMapper [Acesse a documentação](https://modelmapper.org/)
 #### Para a geração de dados para a simulação nos testes foi utilizado a biblioteca Faker [Acesse a documentação](https://github.com/DiUS/java-faker)
