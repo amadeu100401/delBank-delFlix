@@ -4,6 +4,8 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import br.com.delflix.application.useCase.dvdUseCase.activate.IActivateDvdUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -47,6 +49,9 @@ public class DvdControllerTest {
 
     @Mock
     private IGetDvdUseCase getDvdUseCase;
+
+    @Mock
+    private IActivateDvdUseCase activateDvdUseCase;
 
     @InjectMocks
     private DvdController dvdController;
@@ -209,4 +214,28 @@ public class DvdControllerTest {
 
         verify(deleteDvdUseCase).Execute(identifier);
     }
+
+    @Test
+    @DisplayName("Success Activate Dvd")
+    public void Successful_Activate_Dvd() {
+        String identifier = UUID.randomUUID().toString();
+
+        var resposne = dvdController.ActivateDvd(identifier);
+
+        assertEquals(HttpStatus.NO_CONTENT, resposne.getStatusCode());
+    }
+
+    @Test
+    @DisplayName("Failed Activate Dvd")
+    public void Failed_Activate_Dvd() {
+        String identifier = UUID.randomUUID().toString();
+
+        doThrow(ErrorOnValidationException.class).when(activateDvdUseCase).Execute(identifier);
+
+        assertThrows(ErrorOnValidationException.class, () -> {
+            var result = dvdController.ActivateDvd(identifier);
+            assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
+        });
+    }
+
 }

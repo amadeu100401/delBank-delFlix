@@ -46,7 +46,6 @@ public class UpdateDvdUseCaseTest {
 
         when(validateRequest.ValidateDvdRequest(request)).thenReturn(validationResult);
         when(validateRequest.ValidateRequestAuthor(request.getAuthor())).thenReturn(validationResult);
-
         when(updateDvdService.UpdateDvd(request, identifier)).thenReturn(expectedResponse);
 
         var actualResponse = updateDvdUseCase.Execute(request, identifier);
