@@ -35,15 +35,25 @@ public class LogicalDeleteDvdService implements ILogicalDeleteDvdService
     
     private void ValidateIdentifier(String identifier)
     {
-        if(!DvdExists(identifier))
+        if(!DvdNotExists(identifier))
         {
             throw new ErrorOnValidationException("Dvd not found");
         }
+
+        if(DvdIsNotAviable(identifier))
+        {
+            throw new ErrorOnValidationException("Dvd is not available");
+        }
     }
 
-    private boolean DvdExists(String dvdIdentifier)
+    private boolean DvdNotExists(String dvdIdentifier)
     {
         return _readOnlyRespository.DvdExistsByIdentifier(dvdIdentifier);
+    }
+
+    private boolean DvdIsNotAviable(String dvdIdentifier)
+    {
+       return  !_readOnlyRespository.GetDvdByIdentifier(dvdIdentifier).isAviable();
     }
 
     private void UpdateDvd(String identifier)
