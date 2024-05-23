@@ -55,7 +55,7 @@ public class ReturnDvdService implements IReturnDvdService
 
     private Dvd GetDvdInDb(String identifier)
     {
-        return _readOnlyRepository.GetDvdByIdentifier(identifier);
+        return _readOnlyRepository.GetDvdByIdentifierAndActive(identifier);
     }
 
     private void SaveChanges(Dvd dvdEntity)

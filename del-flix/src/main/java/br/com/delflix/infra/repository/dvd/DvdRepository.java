@@ -61,11 +61,16 @@ public class DvdRepository implements IWriteOnlyDvdRepository, IReadOnlyDvdRepos
 
     @Override
     public List<Dvd> GetDvdsCatalog() {
-        return _dvdRepository.findAllAviable();
+        return _dvdRepository.findAll();
+    }
+
+    @Override
+    public Dvd GetDvdByIdentifierAndActive(String identifier) {
+        return _dvdRepository.findByIdentifierAndActive(identifier);
     }
 
     @Override
     public Dvd GetDvdByIdentifier(String identifier) {
-        return _dvdRepository.findByIdentifierAndActive(identifier);
+        return _dvdRepository.findAllByIdentifier(identifier);
     }
 }

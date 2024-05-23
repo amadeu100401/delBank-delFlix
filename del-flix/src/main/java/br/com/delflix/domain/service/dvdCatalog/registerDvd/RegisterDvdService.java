@@ -71,7 +71,8 @@ public class RegisterDvdService implements IRegisterDvdService {
         return new ResponseDvdJson(
                 dvdEntity.getTitle(),
                 dvdEntity.getCopiesQuantity(),
-                dvdEntity.getIdentifier()
+                dvdEntity.getIdentifier(),
+                dvdEntity.isAviable()
         );
     }
 }

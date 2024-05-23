@@ -28,7 +28,8 @@ public class ResponseBuilderFactory {
         return new ResponseDvdJson(
                 faker.book().title(),
                 UtilsTools.GetRandomNumberBetween(0, 10),
-                UUID.randomUUID().toString()
+                UUID.randomUUID().toString(),
+                faker.random().nextBoolean()
         );
     }
 

@@ -55,7 +55,7 @@ public class GetRentDvdServiceTest {
         expectedResponse.setIdentifier(request.getDvdIdentifier());
 
         when(readOnlyDvdRepository.DvdExistsByIdentifier(request.getDvdIdentifier())).thenReturn(true);
-        when(readOnlyDvdRepository.GetDvdByIdentifier(request.getDvdIdentifier())).thenReturn(dvd);
+        when(readOnlyDvdRepository.GetDvdByIdentifierAndActive(request.getDvdIdentifier())).thenReturn(dvd);
         when(mapper.map(request, ResponseRentDvdJson.class)).thenReturn(expectedResponse);
         doNothing().when(updateOnlyDvdRepository).UpdateDvd(dvd);
 

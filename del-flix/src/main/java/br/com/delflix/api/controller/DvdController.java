@@ -1,5 +1,6 @@
 package br.com.delflix.api.controller;
 
+import br.com.delflix.application.useCase.dvdUseCase.activate.IActivateDvdUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequestMapping("/api/dvd/v1")
 @Tag(name = "Dvds", description = "Dvds API")
 public class DvdController {
-
     @Autowired
     private final IRegisterDvdUseCase _registerDvdUseCase;
 
@@ -50,18 +50,23 @@ public class DvdController {
     @Autowired
     private final IGetDvdUseCase _getDvdUseCase;
 
+    @Autowired
+    private final IActivateDvdUseCase _activateDvdUseCase;
+
     public DvdController(IRegisterDvdUseCase registerDvdUseCase,
             IUpdateDvdUseCase updateDvdUseCase,
             ILogicalDeleteUseCase logicalDeleteUseCase,
             IDeleteDvdUseCase deleteUseCase,
             IGetDvdsCatalogUseCase dvdsCatalogUseCase,
-            IGetDvdUseCase getDvdUseCase) {
+            IGetDvdUseCase getDvdUseCase,
+             IActivateDvdUseCase activateDvdUseCase) {
         _registerDvdUseCase = registerDvdUseCase;
         _updateDvdUseCase = updateDvdUseCase;
         _logicalDeleteUseCase = logicalDeleteUseCase;
         _deleteUseCase = deleteUseCase;
         _dvdsCatalogUseCase = dvdsCatalogUseCase;
         _getDvdUseCase = getDvdUseCase;
+        _activateDvdUseCase = activateDvdUseCase;
     }
 
     @PostMapping("/register")
@@ -123,7 +128,7 @@ public class DvdController {
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping("disable-dvd/{identifier}")
+    @DeleteMapping("/disable-dvd/{identifier}")
     @Operation(summary = "Desactivate dvd", description = "Desactivate dvd", tags = {"Dvds"}, responses = {
         @ApiResponse(responseCode = "204", description = "Successful operation", content = @Content),
         @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
@@ -135,7 +140,7 @@ public class DvdController {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("delete/{identifier}")
+    @DeleteMapping("/delete/{identifier}")
     @Operation(summary = "Delete dvd", description = "Delete dvd", tags = {"Dvds"}, responses = {
         @ApiResponse(responseCode = "204", description = "Successful operation", content = @Content),
         @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
@@ -144,6 +149,19 @@ public class DvdController {
     })
     public ResponseEntity DeleteMethodName(@PathVariable String identifier) {
         _deleteUseCase.Execute(identifier);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/activate-dvd/{identifier}")
+    @Operation(summary = "Activate dvd", description = "Activate dvd", tags = {"Dvds"}, responses = {
+            @ApiResponse(responseCode = "204", description = "Successful operation", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Not found", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+    })
+    public ResponseEntity ActivateDvd(@PathVariable String identifier)
+    {
+        _activateDvdUseCase.Execute(identifier);
         return ResponseEntity.noContent().build();
     }
 }

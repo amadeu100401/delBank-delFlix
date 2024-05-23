@@ -70,7 +70,7 @@ public class GetRentDvdService implements IGetRentDvdService
 
     private Dvd GetDvdInDb(String identifier)
     {
-        return _readOnlyRespository.GetDvdByIdentifier(identifier);
+        return _readOnlyRespository.GetDvdByIdentifierAndActive(identifier);
     }
 
     private ResponseRentDvdJson RentDvd(RequestRentJson request)

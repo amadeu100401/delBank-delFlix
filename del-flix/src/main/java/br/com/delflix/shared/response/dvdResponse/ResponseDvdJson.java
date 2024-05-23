@@ -5,15 +5,17 @@ public class ResponseDvdJson
     private String Title;
     private int CopiesQuantity;
     private String Identifier;
+    private boolean Aviable;
 
     public ResponseDvdJson() {
     }
 
-    public ResponseDvdJson(String title, int copiesQuantity, String identifier) 
+    public ResponseDvdJson(String title, int copiesQuantity, String identifier, boolean isActive)
     {
         this.Title = title;
         this.CopiesQuantity = copiesQuantity;
         this.Identifier = identifier;
+        this.Aviable = isActive;
     }
 
     public String getTitle() {
@@ -39,4 +41,8 @@ public class ResponseDvdJson
     public void setIdentifier(String Identifier) {
         this.Identifier = Identifier;
     }
+
+    public boolean isAviable() { return Aviable; }
+
+    public void setAviable(boolean aviable) { Aviable = aviable; }
 }

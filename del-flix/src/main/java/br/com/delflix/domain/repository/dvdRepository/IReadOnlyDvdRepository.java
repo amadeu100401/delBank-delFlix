@@ -9,5 +9,6 @@ public interface IReadOnlyDvdRepository
     public boolean DvdAlreadyRegistred(String title);
     public boolean DvdExistsByIdentifier(String identifier);
     public List<Dvd> GetDvdsCatalog();
+    public Dvd GetDvdByIdentifierAndActive(String identifier);
     public Dvd GetDvdByIdentifier(String identifier);
 }

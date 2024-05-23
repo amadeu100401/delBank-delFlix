@@ -86,7 +86,8 @@ public class UpdateDvdService implements IUpdateDvdService {
         return new ResponseDvdJson(
                 dvdEntity.getTitle(),
                 dvdEntity.getCopiesQuantity(),
-                dvdEntity.getIdentifier()
+                dvdEntity.getIdentifier(),
+                dvdEntity.isAviable()
         );
     }
 }

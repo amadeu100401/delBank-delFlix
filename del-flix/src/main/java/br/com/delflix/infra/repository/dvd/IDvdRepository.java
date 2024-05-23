@@ -22,8 +22,7 @@ public interface IDvdRepository extends JpaRepository<Dvd, Long> {
     @Query("SELECT d FROM Dvd d WHERE d.Identifier = :identifier")
     Dvd findAllByIdentifier(@Param("identifier") String identifier);
 
-    @Query("SELECT d FROM Dvd d WHERE d.Aviable = true")
-    List<Dvd> findAllAviable();
+    List<Dvd> findAll();
 
     @Modifying
     @Transactional

@@ -42,7 +42,7 @@ public class ReturnDvdServiceTest {
 
         when(readOnlyDvdRepository.DvdExistsByIdentifier(identifier))
                 .thenReturn(true);
-        when(readOnlyDvdRepository.GetDvdByIdentifier(identifier))
+        when(readOnlyDvdRepository.GetDvdByIdentifierAndActive(identifier))
                 .thenReturn(dvd);
         doNothing().when(updateOnlyDvdRepository)
                 .UpdateDvd(dvd);
@@ -50,7 +50,7 @@ public class ReturnDvdServiceTest {
         returnDvdService.ReturnDvd(identifier);
 
         verify(readOnlyDvdRepository).DvdExistsByIdentifier(identifier);
-        verify(readOnlyDvdRepository).GetDvdByIdentifier(identifier);
+        verify(readOnlyDvdRepository).GetDvdByIdentifierAndActive(identifier);
         verify(updateOnlyDvdRepository).UpdateDvd(dvd);
     }
 
