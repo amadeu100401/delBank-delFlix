@@ -147,3 +147,10 @@ Certifique-se de que o Postman está instalado e aberto em seu computador. Se vo
 
 Para utilizar o serviço pelo postman basta subir a aplicação, colocar a url base na variável de ambiente da collection.
 É possível rodar a collection como um todo pois os requests possuem testes de validação
+
+## Enum categorias
+- ACTION - 1
+- COMEDY - 2
+- DRAMA - 3
+- ROMANCE - 4
+- HORROR - 5
