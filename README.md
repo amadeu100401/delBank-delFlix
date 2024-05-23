@@ -105,10 +105,11 @@ O sistema foi desenvolvido utilizando a arquitetura em camadas, separando em 6 c
 #### Para a geração de dados para a simulação nos testes foi utilizado a biblioteca Faker [Acesse a documentação](https://github.com/DiUS/java-faker)
 
 ## Sobre os endpoints 
-![image](https://github.com/amadeu100401/delBank-delFlix/assets/54649985/475070c5-f885-4e59-80c0-1dfe97f428e5)
+![image](https://github.com/amadeu100401/delBank-delFlix/assets/54649985/33087ba7-96b1-4da7-abc9-78d3c8eaada8)
 
 1. No controller de Dvds temos:
     - PUT {/update/{identifier}} -> Endpoint para alteração de dados dos dvs já cadastrados na base
+    - PUT {/activate-dvd/{identifier}} -> Endpoint para ativar um dvd
     - POST {/register} -> Endpoint para cadastro de novos dvds
     - GET {/dvd} -> Endpoint para obter a lista de todos os dvds cadastrados
     - GET {/dvd/{identifier}} -> Endpoint para recuperar as infomrações de um dvd específico
@@ -117,6 +118,8 @@ O sistema foi desenvolvido utilizando a arquitetura em camadas, separando em 6 c
 2. No controller de Rent temos:
     - POST {/rent-dvd} -> Endpoint para poder alugar um dvd da base
     - PUT {/rent-dvd} -> Endpoint para pode devolver o dvd alugado
+
+PS: O identifier de cada dvd é um GUID gerado randomicamente no momento da criação do objeto. Foi optado esse caminho a expor o id do dado no banco.
       
 ## Postman
 Foi disponibilizado junto ao repositório uma collection no postman para testes, caso prefira.
